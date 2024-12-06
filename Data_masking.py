@@ -19,19 +19,19 @@ def get_masked_input(prompt):
         tty.setraw(fd)
         while True:
             char = sys.stdin.read(1)
-            if char in ('\n', '\r'):  # Enter key pressed
+            if char in ('\n', '\r'):  
                 break
-            if char == '\x7f':  # Backspace handling
+            if char == '\x7f': 
                 if len(masked_input) > 0:
                     masked_input = masked_input[:-1]
-                    sys.stdout.write('\b \b')  # Erase the last 'X' displayed
+                    sys.stdout.write('\b \b')  
             else:
                 masked_input += char
-                sys.stdout.write('X')  # Display 'X' for every character typed
+                sys.stdout.write('X')  
             sys.stdout.flush()
     finally:
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-    print()  # Move to the next line after input
+    print() 
     return masked_input
 
 def shuffle_message(word_count):
